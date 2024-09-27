@@ -45,6 +45,11 @@ const MainFormPage = () => {
 
             if(response?.data?.errors?.length > 0){
               enqueueSnackbar(response?.data?.errors?.[0]  || 'Something went wrong',{variant:"error"});
+            }else if(response?.data?.response?.errors?.[0]){
+              const errors = response?.data?.response?.errors?.[0];
+              const errorMessages = Object.values(errors);
+              const errorKeys = Object.keys(errors);
+              enqueueSnackbar(`${errorMessages?.[0]} (${errorKeys?.[0]})`  || 'Something went wrong',{variant:"error"});
             }else if(response?.data?.status_text){
               enqueueSnackbar(`Form successfully submitted (${response?.data?.status_text})`,{variant:"success"});
             }else if(response?.data?.status === 200){

@@ -54,10 +54,10 @@ const MainFormPage = () => {
               enqueueSnackbar(`Form successfully submitted (${response?.data?.status_text})`,{variant:"success"});
             }else if(response?.data?.status === 200){
               enqueueSnackbar(`Form successfully submitted`,{variant:"success"});
-              if(response?.data?.response?.redirect_url){
-                window.location.href = response?.data?.response?.redirect_url;
-              }else if(response?.data?.response?.rejectUrl){
-                window.location.href = response?.data?.response?.rejectUrl;
+              if(response?.data?.response?.status_text === "sold"){
+                window.open(response?.data?.response?.redirect_url, '_blank');
+              }else if(response?.data?.response?.status_text === "reject"){
+                window.open(response?.data?.response?.rejectUrl, '_blank');
               }
            
             }
